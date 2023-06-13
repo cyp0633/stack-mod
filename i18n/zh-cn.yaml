@@ -2,7 +2,7 @@ toggleMenu:
     other: 切换菜单
 
 darkMode:
-    other: 暗色模式
+    other: 深色模式
 
 article:
     back:
@@ -19,6 +19,9 @@ article:
 
     readingTime:
         other: "阅读时长: {{ .Count }} 分钟"
+
+    license:
+        other: 许可证：
 
 notFound:
     title:

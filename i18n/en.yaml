@@ -31,7 +31,10 @@ article:
 
     readingTime:
         one: "{{ .Count }} minute read"
-        other: "{{ .Count }} minute read"
+        other: "{{ .Count }} minutes read"
+
+    license:
+        other: "Licensed under: "
 
 notFound:
     title:
