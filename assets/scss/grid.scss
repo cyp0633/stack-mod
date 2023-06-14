@@ -31,13 +31,13 @@
         }
 
         @include respond(xl) {
-            max-width: 80%;
+            max-width: 985;
             --left-sidebar-max-width: 15%;
             --right-sidebar-max-width: 25%;
         }
 
         @include respond(2xl) {
-            max-width: 80%;
+            max-width: 85%;
             --left-sidebar-max-width: 15%;
             --right-sidebar-max-width: 20%;
         }
