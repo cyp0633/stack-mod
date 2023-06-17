@@ -3,12 +3,20 @@
 <script src="https://artalk.cyp0633.icu/dist/Artalk.js"></script>
 <div id="Comments"></div>
 <script>
-  Artalk.init({
-    el:        '#Comments',
-    pageKey:   '{{ .Permalink }}',
-    pageTitle: '{{ .Title }}',
-    server:    '{{ $.Site.Params.comments.artalk.host }}',
-    site:      '{{ $.Site.Params.title }}',
-  })
+    Artalk.init({
+        el: '#Comments',
+        pageKey: '{{ .Permalink }}',
+        pageTitle: '{{ .Title }}',
+        server: '{{ $.Site.Params.comments.artalk.host }}',
+        site: '{{ $.Site.Params.title }}',
+        locale: "auto"
+    })
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (e.detail === 'dark') {
+            Artalk.setDarkMode(true)
+        } else {
+            Artalk.setDarkMode(false)
+        }
+    })
 </script>
 {{- end -}}
