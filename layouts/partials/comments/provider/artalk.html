@@ -1,0 +1,14 @@
+{{- with .Site.Params.comments.artalk -}}
+<link href="https://artalk.cyp0633.icu/dist/Artalk.css" rel="stylesheet">
+<script src="https://artalk.cyp0633.icu/dist/Artalk.js"></script>
+<div id="Comments"></div>
+<script>
+  Artalk.init({
+    el:        '#Comments',
+    pageKey:   '{{ .Permalink }}',
+    pageTitle: '{{ .Title }}',
+    server:    '{{ $.Site.Params.comments.artalk.host }}',
+    site:      '{{ $.Site.Params.title }}',
+  })
+</script>
+{{- end -}}
