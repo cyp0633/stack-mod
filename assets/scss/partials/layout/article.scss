@@ -264,19 +264,6 @@
         font-family: var(--code-font-family);
     }
 
-    .gallery {
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin: 1.5em 0;
-        gap: 10px;
-
-        figure {
-            margin: 0;
-        }
-    }
-
     pre {
         overflow-x: auto;
         display: block;
@@ -404,7 +391,6 @@
     figure,
     .highlight,
     pre,
-    .gallery,
     .video-wrapper,
     .table-wrapper,
     .s_video_simple {
