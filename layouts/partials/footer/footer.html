@@ -20,5 +20,6 @@
         {{ T "footer.builtWith" (dict "Generator" $Generator) | safeHTML }} <br />
         {{ T "footer.designedBy" (dict "Theme" $Theme "DesignedBy" $DesignedBy) | safeHTML }} · 
         {{ T "footer.moddedWith" (dict "ModVariant" $ModVariant) | safeHTML }}
+         · Commit #{{ printf `<a href="https://github.com/cyp0633/stack-mod/commit/%s">%s</a>` .GitInfo.AbbreviatedHash .GitInfo.AbbreviatedHash | safeHTML }}
     </section>
 </footer>
