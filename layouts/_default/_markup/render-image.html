@@ -5,6 +5,6 @@
 <figure>
 	<img src="{{ $Permalink }}" loading="lazy" {{ with $alt }} alt="{{ . }}" {{ end }}>
 	{{ if .Title }}
-	<figcaption>{{ .Title | safeHTML }}</figcaption>
+	<figcaption>{{ .Title | markdownify }}</figcaption>
 	{{ end }}
 </figure>
