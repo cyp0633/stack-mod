@@ -3,7 +3,7 @@
 <script src="https://artalk.cyp0633.icu/dist/Artalk.js"></script>
 <div id="Comments"></div>
 <script>
-    Artalk.init({
+    const artalk = Artalk.init({
         el: '#Comments',
         pageKey: '{{ .Permalink }}',
         pageTitle: '{{ .Title }}',
@@ -13,9 +13,9 @@
     })
     window.addEventListener('onColorSchemeChange', (e) => {
         if (e.detail === 'dark') {
-            Artalk.setDarkMode(true)
+            artalk.setDarkMode(true)
         } else {
-            Artalk.setDarkMode(false)
+            artalk.setDarkMode(false)
         }
     })
 </script>
