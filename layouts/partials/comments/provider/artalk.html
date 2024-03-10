@@ -1,6 +1,6 @@
 {{- with .Site.Params.comments.artalk -}}
-<link href="https://artalk.cyp0633.icu/dist/Artalk.css" rel="stylesheet">
-<script src="https://artalk.cyp0633.icu/dist/Artalk.js"></script>
+<link href="{{ $.Site.Params.comments.artalk.host }}/dist/Artalk.css" rel="stylesheet">
+<script src="{{ $.Site.Params.comments.artalk.host }}/dist/Artalk.js"></script>
 <div id="Comments"></div>
 <script>
     const artalk = Artalk.init({
@@ -8,7 +8,7 @@
         pageKey: '{{ .Permalink }}',
         pageTitle: '{{ .Title }}',
         server: '{{ $.Site.Params.comments.artalk.host }}',
-        site: '{{ $.Site.Params.title }}',
+        site: '{{ $.Site.Title }}',
         locale: "auto"
     })
     window.addEventListener('onColorSchemeChange', (e) => {
