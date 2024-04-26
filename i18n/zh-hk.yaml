@@ -16,6 +16,7 @@ article:
     tableOfContents: 目錄
     relatedContent: 相關內容
     lastUpdatedOn: 上次改過於
+    wordCount: "字數: {{ .Count }}"
     readingTime:
         one: "需要 {{ .Count }} 分鐘閱讀"
         other: "需要 {{ .Count }} 分鐘閱讀"

@@ -33,6 +33,8 @@ article:
         one: "{{ .Count }} minute read"
         other: "{{ .Count }} minutes read"
 
+    wordCount: "{{ .Count}} words in total"
+
     license:
         other: "Licensed under: "
 

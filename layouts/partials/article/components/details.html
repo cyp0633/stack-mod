@@ -45,6 +45,15 @@
                 </time>
             </div>
         {{ end }}
+
+        <!-- word count -->
+        <div>
+            <!-- {{partial "helper/icon" "clock"}} -->
+            <time class="article-time--wordcount">
+                <!-- {{ .WordCount }} -->
+                {{ T "article.wordCount" .WordCount }}
+            </time>
+        </div>
     </footer>
     {{ end }}
 

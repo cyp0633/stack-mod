@@ -8,7 +8,7 @@ article:
     relatedContent: 相关文章
     lastUpdatedOn: 最后更新于
     readingTime: "阅读时长: {{ .Count }} 分钟"
-
+    wordCount: "字数: {{ .Count }}"
     license:
         other: 许可证：
 
