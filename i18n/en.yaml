@@ -83,3 +83,9 @@ footer:
 
     moddedWith:
         other: Modded version {{ .ModVariant }} used on this site
+
+datetime:
+    date: "January 2, 2006"
+    time: "15:04"
+    datetime: "January 2, 2006 15:04"
+    shortDatetime: "2006/01/02 15:04"

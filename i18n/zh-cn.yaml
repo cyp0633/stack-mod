@@ -34,3 +34,9 @@ footer:
         other: 自用修改版本 {{ .ModVariant }}
     builtWith: Built with {{ .Generator }}
     designedBy: 主题 {{ .Theme }} 由 {{ .DesignedBy }} 设计
+
+datetime:
+    date: "2006 年 1 月 2 日"
+    time: "15:04"
+    datetime: "2006 年 1 月 2 日 15:04"
+    shortDatetime: "2006/01/02 15:04"
