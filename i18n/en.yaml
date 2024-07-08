@@ -38,6 +38,10 @@ article:
     license:
         other: "Licensed under: "
 
+    codeblock:
+        copy: Copy Code
+        copied: Copied
+
 notFound:
     title:
         other: Not Found
