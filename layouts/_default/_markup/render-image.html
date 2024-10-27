@@ -2,8 +2,9 @@
 {{- $Permalink := .Destination | relURL | safeURL -}}
 {{- $alt := .PlainText | safeHTML -}}
 
-<figure>
-	<img src="{{ $Permalink }}" loading="lazy" {{ with $alt }} alt="{{ . }}" {{ end }}>
+<figure style="max-width: 80%; margin: auto;">
+	<img src="{{ $Permalink }}" loading="lazy" {{ with $alt }} alt="{{ . }}" {{ end }}
+		style="width: 100%; height: auto;">
 	{{ if .Title }}
 	<figcaption>{{ .Title | markdownify }}</figcaption>
 	{{ end }}
