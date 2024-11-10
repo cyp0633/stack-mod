@@ -1,0 +1,26 @@
+{{ define "main" }}
+<div class="timeline">
+  {{ range .Paginator.Pages }}
+  <div class="timeline-item">
+    <div class="timeline-date">
+      {{ .Date.Format "Jan 2, 2006 at 3:04pm" }}
+    </div>
+    <div class="timeline-content">
+      {{ .Content }}
+    </div>
+  </div>
+  {{ end }}
+
+  <!-- Pagination Controls -->
+  {{ if gt .Paginator.TotalPages 1 }}
+  <div class="pagination">
+    {{ if .Paginator.HasPrev }}
+    <a href="{{ .Paginator.Prev.URL }}">Previous</a>
+    {{ end }}
+    {{ if .Paginator.HasNext }}
+    <a href="{{ .Paginator.Next.URL }}">Next</a>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+{{ end }}

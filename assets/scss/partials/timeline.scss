@@ -1,0 +1,47 @@
+.timeline {
+  width: 100%;
+  max-width: 800px;            // Similar to articles
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .timeline-item {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: var(--card-border-radius);
+    border: 1px solid var(--card-separator-color);
+    background-color: var(--card-background);
+    box-shadow: var(--shadow-l1);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    &:hover {
+      box-shadow: var(--shadow-l2);   // Add a hover effect similar to articles
+    }
+
+    .timeline-date {
+      font-size: 1.4rem;              // Match `.article-time` for consistency
+      color: var(--card-text-color-secondary);
+      margin-bottom: 10px;
+    }
+
+    .timeline-content {
+      font-family: var(--article-font-family);
+      font-size: 1.6rem;              // Match `.article-details` or `.article-title` for readability
+      color: var(--card-text-color-main);
+      line-height: 1.75;
+      
+      a {
+        color: var(--accent-color);
+        text-decoration: underline;
+        &:hover {
+          color: var(--accent-color-darker);
+        }
+      }
+    }
+  }
+}
