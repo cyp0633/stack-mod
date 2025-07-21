@@ -1,7 +1,7 @@
-{{- $query := first 1 (where .Context.Site.Pages "Layout" "==" "archives") -}}
+{{- $query := first 1 (where .Context.Site.Pages "Layout" "==" "search") -}}
 {{- if $query -}}
     {{- $searchPage := index $query 0 -}}
-    <form action="{{ $searchPage.RelPermalink }}" class="search-form widget" {{ with .OutputFormats.Get "json" -}}data-json="{{ .Permalink }}" {{- end }}>
+    <form action="{{ $searchPage.RelPermalink }}" class="search-form widget" {{ with $searchPage.OutputFormats.Get "json" -}}data-json="{{ .Permalink }}" {{- end }}>
         <p>
             <label>{{ T "search.title" }}</label>
             <input name="keyword" required placeholder="{{ T `search.placeholder` }}" />
@@ -12,5 +12,5 @@
         </p>
     </form>
 {{- else -}}
-    {{- warnf "Archives page not found. Create a page with layout: archives." -}}
+    {{- warnf "Search page not found. Create a page with layout: search." -}}
 {{- end -}}

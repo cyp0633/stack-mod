@@ -1,0 +1,23 @@
+{{- $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections -}}
+{{- $result := slice -}}
+
+{{- range $pages -}}
+    {{- $data := dict 
+        "title" .Title
+        "content" (.Plain)
+        "permalink" .RelPermalink
+        "date" (.Date.Format "January 2, 2006")
+        "preview" ""
+        "matchCount" 0
+    -}}
+    {{- if .Params.image -}}
+        {{- $imageURL := .Params.image -}}
+        {{- if not (hasPrefix $imageURL "http") -}}
+            {{- $imageURL = printf "%s/%s" .RelPermalink .Params.image -}}
+        {{- end -}}
+        {{- $data = merge $data (dict "image" $imageURL) -}}
+    {{- end -}}
+    {{- $result = $result | append $data -}}
+{{- end -}}
+
+{{ jsonify $result }} 
