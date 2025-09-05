@@ -6,12 +6,12 @@
 *   @link: https://github.com/CaiJimmy/hugo-theme-stack
 */
 import StackCodeBlock from "ts/codeblock";
-import { getColor } from 'ts/color';
 import menu from 'ts/menu';
 import createElement from 'ts/createElement';
 import StackColorScheme from 'ts/colorScheme';
 import { setupScrollspy } from 'ts/scrollspy';
 import { setupSmoothAnchors } from "ts/smoothAnchors";
+import { initImageZoom } from 'ts/zoom';
 
 let Stack = {
     init: () => {
@@ -24,6 +24,7 @@ let Stack = {
         if (articleContent) {
             setupSmoothAnchors();
             setupScrollspy();
+            initImageZoom();
         }
 
         new StackColorScheme(document.getElementById('dark-mode-toggle'));
