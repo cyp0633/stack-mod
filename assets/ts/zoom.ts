@@ -25,7 +25,7 @@ function createOverlay(): HTMLElement {
     return overlay;
 }
 
-function createZoomContainer(imgSrc: string, altText: string): HTMLDivElement {
+function createZoomContainer(imgSrc: string, altText: string): { container: HTMLDivElement; img: HTMLImageElement } {
     const container = document.createElement('div');
     container.style.maxWidth = '100%';
     container.style.maxHeight = '100%';
@@ -42,16 +42,16 @@ function createZoomContainer(imgSrc: string, altText: string): HTMLDivElement {
     img.style.maxHeight = 'unset';
 
     container.appendChild(img);
-    return container;
+    return { container, img };
 }
 
-function enablePanzoom(container: HTMLElement) {
+function enablePanzoom(container: HTMLElement, img: HTMLImageElement) {
     // @ts-ignore
     const panzoom = (window as any).Panzoom ? (window as any).Panzoom(container, {
         maxScale: 8,
-        minScale: 0.2,
+        minScale: 0.1,
         animate: true,
-        contain: 'outside'
+        contain: 'inside'
     }) : null;
 
     const parent = container.parentElement as HTMLElement;
@@ -67,6 +67,28 @@ function enablePanzoom(container: HTMLElement) {
         parent.addEventListener('touchend', () => {
             lastTouchEnd = Date.now();
         });
+
+        const fitAndCenter = () => {
+            const parentW = parent.clientWidth || window.innerWidth;
+            const parentH = parent.clientHeight || window.innerHeight;
+            const naturalW = img.naturalWidth || img.width;
+            const naturalH = img.naturalHeight || img.height;
+            if (!naturalW || !naturalH) return;
+            const scaleFit = Math.min(parentW / naturalW, parentH / naturalH);
+            const initialScale = Math.min(1, scaleFit || 1);
+            panzoom.zoom(initialScale, { animate: false });
+            const scaledW = naturalW * initialScale;
+            const scaledH = naturalH * initialScale;
+            const dx = (parentW - scaledW) / 2;
+            const dy = (parentH - scaledH) / 2;
+            panzoom.pan(dx, dy, { animate: false });
+        };
+
+        if (img.complete && img.naturalWidth) {
+            fitAndCenter();
+        } else {
+            img.addEventListener('load', fitAndCenter, { once: true });
+        }
     }
 }
 
@@ -76,10 +98,10 @@ function closeOverlay(overlay: HTMLElement) {
 
 function openZoom(src: string, alt: string) {
     const overlay = createOverlay();
-    const container = createZoomContainer(src, alt);
+    const { container, img } = createZoomContainer(src, alt);
     overlay.appendChild(container);
     document.body.appendChild(overlay);
-    enablePanzoom(container);
+    enablePanzoom(container, img);
 }
 
 
