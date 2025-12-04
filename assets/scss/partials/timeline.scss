@@ -1,16 +1,17 @@
 .timeline {
+  // Mobile-first: cards sit flush with the page container so we
+  // don’t get double padding around the text area.
   width: 100%;
-  max-width: 800px;            // Similar to articles
-  margin: 0 auto;
-  padding: 20px;
+  margin: 0;
+  padding: 0 0 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 
   .timeline-item {
     width: 100%;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
     border-radius: var(--card-border-radius);
     border: 1px solid var(--card-separator-color);
     background-color: var(--card-background);
@@ -43,5 +44,14 @@
         }
       }
     }
+  }
+
+  // On medium screens and up, pull the cards back into a
+  // centered column that matches article/card layout.
+  @include respond(md) {
+    max-width: 800px;            // Similar to articles
+    margin: 0 auto;
+    padding: 20px;
+    align-items: center;
   }
 }
