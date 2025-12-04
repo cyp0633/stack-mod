@@ -1,0 +1,32 @@
+{{- $page := . -}}
+<article class="timeline-card">
+    <div class="timeline-card__inner">
+        <div class="timeline-card__meta">
+            <span class="timeline-card__badge">
+                {{- i18n "home.timeline.badge" | default "Timeline" -}}
+            </span>
+            {{- if not $page.Date.IsZero -}}
+                <time class="timeline-card__date" datetime='{{ $page.Date.Format "2006-01-02T15:04:05Z07:00" }}'>
+                    {{- $page.Date | time.Format (or $page.Site.Params.dateFormat.timeline (or $page.Site.Params.dateFormat.published "Jan 02, 2006")) -}}
+                </time>
+            {{- end -}}
+        </div>
+
+        {{- with $page.Title }}
+            <h2 class="article-title timeline-card__title">
+                <a href="{{ $page.RelPermalink }}">{{ . }}</a>
+            </h2>
+        {{- end }}
+
+        <div class="timeline-card__content">
+            {{- $page.Content -}}
+        </div>
+
+        <footer class="timeline-card__footer">
+            <a class="timeline-card__link" href="{{ $page.RelPermalink }}">
+                {{- i18n "home.timeline.readMore" | default "View timeline entry" -}}
+            </a>
+        </footer>
+    </div>
+</article>
+

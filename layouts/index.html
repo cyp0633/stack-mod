@@ -1,9 +1,27 @@
 {{ define "main" }}
-    {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
-    {{ $pag := .Paginate ($pages) }}
-    <section class="article-list">
-        {{ range $index, $element := $pag.Pages }}
-            {{ partial "article-list/default" . }}
+    {{ $paginator := .Paginator }}
+    {{ if not $paginator }}
+        {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
+        {{ $articles := where .Site.RegularPages "Type" "in" $mainSections }}
+        {{ $timeline := where .Site.RegularPages "Section" "timeline" }}
+
+        {{ $articles = where $articles "Lang" .Lang }}
+        {{ $timeline = where $timeline "Lang" .Lang }}
+
+        {{ $pages := union $articles $timeline }}
+        {{ $pages = sort $pages "Date" "desc" }}
+        {{ $paginator = .Paginate $pages }}
+    {{ end }}
+
+    <section class="article-list article-list--mixed">
+        {{ range $paginator.Pages }}
+            {{ if eq .Section "timeline" }}
+                {{ partial "home/mixed-timeline-card" . }}
+            {{ else }}
+                {{ partial "article-list/default" . }}
+            {{ end }}
+        {{ else }}
+            <p class="article-list__empty">{{ i18n "list.noPosts" | default "Nothing to show yet." }}</p>
         {{ end }}
     </section>
 

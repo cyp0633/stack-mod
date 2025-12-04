@@ -40,3 +40,10 @@ datetime:
     time: "15:04"
     datetime: "2006 年 1 月 2 日 15:04"
     shortDatetime: "2006/01/02 15:04"
+
+home:
+    timeline:
+        badge:
+            other: 动态
+        readMore:
+            other: 查看完整动态
