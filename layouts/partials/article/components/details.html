@@ -9,19 +9,26 @@
     </header>
     {{ end }}
 
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="{{ .RelPermalink }}">
-                {{- .Title -}}
-            </a>
-        </h2>
-    
-        {{ with .Params.description }}
-        <h3 class="article-subtitle">
-            {{ . }}
-        </h3>
-        {{ end }}
-    </div>
+    {{/* 
+        Timeline entries are intentionally title-less in the UI.
+        Hugo will still derive a .Title from the filename, but for the
+        "timeline" section we don't render it as a heading.
+    */}}
+    {{ if ne .Section "timeline" }}
+        <div class="article-title-wrapper">
+            <h2 class="article-title">
+                <a href="{{ .RelPermalink }}">
+                    {{- .Title -}}
+                </a>
+            </h2>
+        
+            {{ with .Params.description }}
+            <h3 class="article-subtitle">
+                {{ . }}
+            </h3>
+            {{ end }}
+        </div>
+    {{ end }}
 
     {{ $showReadingTime := .Params.readingTime | default (.Site.Params.article.readingTime) }}
     {{ $showDate := not .Date.IsZero }}

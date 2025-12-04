@@ -12,12 +12,6 @@
             {{- end -}}
         </div>
 
-        {{- with $page.Title }}
-            <h2 class="article-title timeline-card__title">
-                <a href="{{ $page.RelPermalink }}">{{ . }}</a>
-            </h2>
-        {{- end }}
-
         <div class="timeline-card__content">
             {{- $page.Content -}}
         </div>
