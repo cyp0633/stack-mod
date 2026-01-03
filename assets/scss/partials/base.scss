@@ -14,6 +14,13 @@ body {
     font-size: 1.6rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-autospace: normal;
+}
+
+@supports (text-autospace: ideograph-alpha ideograph-numeric replace) {
+    body {
+        text-autospace: ideograph-alpha ideograph-numeric replace;
+    }
 }
 
 /* scrollbar styles for Firefox */
