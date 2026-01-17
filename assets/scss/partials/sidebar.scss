@@ -171,7 +171,23 @@
     }
 }
 
-#dark-mode-toggle {
+[data-hdr="on"] {
+    #hdr-mode-toggle {
+        color: var(--accent-color);
+        font-weight: 700;
+
+        .icon-tabler-toggle-left {
+            display: none;
+        }
+
+        .icon-tabler-toggle-right {
+            display: unset;
+        }
+    }
+}
+
+#dark-mode-toggle,
+#hdr-mode-toggle {
     margin-top: auto;
     color: var(--body-text-color);
     display: flex;

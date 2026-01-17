@@ -2,6 +2,8 @@ toggleMenu: 切換選單
 
 darkMode: 深色模式
 
+hdrMode: HDR 模式
+
 list:
     page:
         one: "第 {{ .Count }} 頁"

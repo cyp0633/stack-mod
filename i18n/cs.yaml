@@ -4,6 +4,9 @@ toggleMenu:
 darkMode:
     other: Tmavý režim
 
+hdrMode:
+    other: HDR Mode
+
 list:
     page:
         one: "{{ .Count }} stránka"

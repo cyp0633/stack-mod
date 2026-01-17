@@ -2,6 +2,8 @@ toggleMenu: 切换菜单
 
 darkMode: 深色模式
 
+hdrMode: HDR 显示
+
 article:
     back: 返回
     tableOfContents: 目录
