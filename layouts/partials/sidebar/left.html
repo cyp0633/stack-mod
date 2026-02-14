@@ -46,7 +46,7 @@
         </ol>
     {{- end -}}
 
-    <ol class="menu" id="main-menu">
+    <ol class="menu" id="main-menu" role="navigation" aria-label="{{ T `toggleMenu` }}">
         {{ $currentPage := . }}
         {{ range .Site.Menus.main }}
         {{ $active := or (eq $currentPage.Title .Name) (or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .)) }}

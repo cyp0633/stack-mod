@@ -16,11 +16,19 @@
     */}}
     {{ if ne .Section "timeline" }}
         <div class="article-title-wrapper">
+            {{ if .IsPage }}
+            <h1 class="article-title">
+                <a href="{{ .Permalink }}">
+                    {{- .Title -}}
+                </a>
+            </h1>
+            {{ else }}
             <h2 class="article-title">
                 <a href="{{ .RelPermalink }}">
                     {{- .Title -}}
                 </a>
             </h2>
+            {{ end }}
         
             {{ with .Params.description }}
             <h3 class="article-subtitle">
@@ -38,7 +46,7 @@
         {{ if $showDate }}
             <div>
                 {{ partial "helper/icon" "date" }}
-                <time class="article-time--published">
+                <time class="article-time--published" datetime='{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}'>
                     {{- .Date | time.Format (or .Site.Params.dateFormat.published "Jan 02, 2006") -}}
                 </time>
             </div>
@@ -47,19 +55,19 @@
         {{ if $showReadingTime }}
             <div>
                 {{ partial "helper/icon" "clock" }}
-                <time class="article-time--reading">
+                <span class="article-time--reading">
                     {{ T "article.readingTime" .ReadingTime }}
-                </time>
+                </span>
             </div>
         {{ end }}
 
         <!-- word count -->
         <div>
             {{partial "helper/icon" "numbers"}}
-            <time class="article-time--wordcount">
+            <span class="article-time--wordcount">
                 <!-- {{ .WordCount }} -->
                 {{ T "article.wordCount" .WordCount }}
-            </time>
+            </span>
         </div>
     </footer>
     {{ end }}
