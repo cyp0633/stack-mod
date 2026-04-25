@@ -1,4 +1,8 @@
-<details>
-    <summary>{{ (.Get 0) | markdownify }}</summary>
-    {{ .Inner | markdownify }}
+<details class="article-details-fold">
+    <summary class="article-details-fold__summary">
+        <span>{{ (.Get 0) | markdownify }}</span>
+    </summary>
+    <div class="article-details-fold__content">
+        {{ .Inner | markdownify }}
+    </div>
 </details>

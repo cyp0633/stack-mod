@@ -164,6 +164,12 @@
         padding: 0;
         box-shadow: none;
         margin: 0;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     li {

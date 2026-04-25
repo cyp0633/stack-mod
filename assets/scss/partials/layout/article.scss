@@ -272,6 +272,65 @@
         }
     }
 
+    .article-details-fold {
+        margin: 1.5em 0;
+        border: 1px solid var(--card-separator-color);
+        border-inline-start: var(--blockquote-border-size) solid var(--card-separator-color);
+        border-radius: var(--tag-border-radius);
+        background-color: var(--blockquote-background-color);
+        overflow: hidden;
+
+        summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 12px calc(var(--card-padding) - var(--blockquote-border-size));
+            color: var(--card-text-color-main);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            &::-webkit-details-marker {
+                display: none;
+            }
+
+            &::before {
+                content: "";
+                width: 0.55em;
+                height: 0.55em;
+                border-right: 2px solid var(--card-text-color-tertiary);
+                border-bottom: 2px solid var(--card-text-color-tertiary);
+                transform: rotate(-45deg);
+                transition: transform 0.2s ease;
+                flex-shrink: 0;
+            }
+
+            &:hover {
+                background-color: var(--card-background-selected);
+            }
+        }
+
+        &[open] summary {
+            border-bottom: 1px solid var(--card-separator-color);
+
+            &::before {
+                transform: rotate(45deg);
+            }
+        }
+
+        &__content {
+            padding: 0 calc(var(--card-padding) - var(--blockquote-border-size)) 15px;
+
+            > :first-child {
+                margin-top: 1em;
+            }
+
+            > :last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
     hr {
         width: 100px;
         margin: 40px auto;
