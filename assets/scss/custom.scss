@@ -1,1 +1,81 @@
 /* Place your custom SCSS in HUGO_SITE_FOLDER/assets/scss/custom.scss */
+
+.article-content {
+    img[data-zoomable="true"],
+    figure > img,
+    p > img {
+        cursor: zoom-in;
+    }
+
+    img.image-zoom-pending {
+        cursor: wait;
+    }
+}
+
+.image-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow: hidden;
+    touch-action: none;
+    cursor: zoom-out;
+    background: rgba(20, 20, 20, 0.58);
+    opacity: 0;
+    transition: opacity 180ms ease;
+    overscroll-behavior: contain;
+
+    &[data-scheme="dark"],
+    :root[data-scheme="dark"] & {
+        background: rgba(0, 0, 0, 0.72);
+    }
+
+    @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+        backdrop-filter: blur(12px) saturate(1.1);
+        -webkit-backdrop-filter: blur(12px) saturate(1.1);
+    }
+
+    &.is-open {
+        opacity: 1;
+    }
+
+    &.is-closing {
+        opacity: 0;
+    }
+}
+
+.image-zoom-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: none;
+    max-height: none;
+    width: auto;
+    height: auto;
+    transform-origin: 0 0;
+    user-select: none;
+    touch-action: none;
+    cursor: grab;
+    opacity: 0;
+    filter: drop-shadow(0 18px 38px rgba(0, 0, 0, 0.32));
+    transition: opacity 180ms ease;
+    will-change: transform;
+
+    .image-zoom-overlay.is-open & {
+        opacity: 1;
+    }
+
+    .image-zoom-overlay:active & {
+        cursor: grabbing;
+    }
+
+    &.is-animating {
+        transition: opacity 180ms ease, transform 180ms ease;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .image-zoom-overlay,
+    .image-zoom-image {
+        transition: none;
+    }
+}
