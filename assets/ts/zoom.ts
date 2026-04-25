@@ -88,6 +88,8 @@ class ImageLightbox {
     private previousBodyOverflow = '';
     private closeTimer = 0;
     private closed = false;
+    private backdropPointerId: number | null = null;
+    private backdropPointerStart: Point | null = null;
 
     constructor(src: string, alt: string) {
         this.overlay = document.createElement('div');
@@ -127,10 +129,6 @@ class ImageLightbox {
     }
 
     private bindEvents() {
-        this.overlay.addEventListener('click', (event) => {
-            if (event.target === this.overlay) this.close();
-        });
-
         this.overlay.addEventListener('wheel', (event) => {
             event.preventDefault();
             const direction = event.deltaY > 0 ? -1 : 1;
@@ -156,15 +154,17 @@ class ImageLightbox {
     };
 
     private async prepareImage() {
-        try {
-            if ('decode' in this.image) await this.image.decode();
-        } catch {
-            if (!this.image.complete) {
-                await new Promise<void>((resolve) => this.image.addEventListener('load', () => resolve(), { once: true }));
-            }
+        const image = this.image;
+        const decode = image.decode;
+
+        if (!image.complete) {
+            await new Promise<void>((resolve) => image.addEventListener('load', () => resolve(), { once: true }));
         }
-        if (!('decode' in this.image) && !this.image.complete) {
-            await new Promise<void>((resolve) => this.image.addEventListener('load', () => resolve(), { once: true }));
+
+        try {
+            if (typeof decode === 'function') await decode.call(image);
+        } catch {
+            // Some browsers reject decode() for already-loaded animated or cross-origin images.
         }
 
         this.fitToViewport();
@@ -192,6 +192,13 @@ class ImageLightbox {
     private onPointerDown(event: PointerEvent) {
         if (event.button !== 0 && event.pointerType === 'mouse') return;
         event.preventDefault();
+        if (event.target === this.overlay) {
+            this.backdropPointerId = event.pointerId;
+            this.backdropPointerStart = { x: event.clientX, y: event.clientY };
+        } else {
+            this.backdropPointerId = null;
+            this.backdropPointerStart = null;
+        }
         this.overlay.setPointerCapture(event.pointerId);
         this.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
         this.transformStart = { ...this.transform };
@@ -234,6 +241,7 @@ class ImageLightbox {
     }
 
     private onPointerEnd(event: PointerEvent) {
+        const shouldCloseBackdrop = this.shouldCloseFromBackdrop(event);
         this.pointers.delete(event.pointerId);
         if (this.overlay.hasPointerCapture(event.pointerId)) {
             this.overlay.releasePointerCapture(event.pointerId);
@@ -250,6 +258,16 @@ class ImageLightbox {
             this.pinchStartDistance = 0;
             this.pinchStartCenter = null;
         }
+
+        if (shouldCloseBackdrop) this.close();
+    }
+
+    private shouldCloseFromBackdrop(event: PointerEvent): boolean {
+        if (this.backdropPointerId !== event.pointerId || !this.backdropPointerStart) return false;
+        this.backdropPointerId = null;
+        const movement = distance(this.backdropPointerStart, { x: event.clientX, y: event.clientY });
+        this.backdropPointerStart = null;
+        return movement < 6 && this.pointers.size <= 1;
     }
 
     private zoomAt(factor: number, point: Point) {
